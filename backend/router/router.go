@@ -1,11 +1,11 @@
 package router
 
 import (
-	"backend/services/users"
+	"backend/controller/users"
 
 	"github.com/gin-gonic/gin"
 )
 
 func MapUrls(engine *gin.Engine) {
-	engine.POST("/users/login", users.Login())
+	engine.POST("/users/login", users.Login)
 }
