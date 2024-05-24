@@ -7,8 +7,11 @@ import (
 )
 
 func main() {
-
 	engine := gin.New()
 	router.MapUrls(engine)
 	engine.Run(":8080")
+}
+
+func aux() {
+	print("Hello")
 }

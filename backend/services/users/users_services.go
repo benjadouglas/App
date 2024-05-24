@@ -22,3 +22,6 @@ func Login(request users.LoginRequest) users.LoginResponse {
 	}
 	return users.LoginResponse{Token: "404"}
 }
+
+func SignUp(request users.SignUpRequest) int {
+}
