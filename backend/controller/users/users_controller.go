@@ -21,16 +21,16 @@ func SignIn(c *gin.Context) {
 	c.IndentedJSON(i, response)
 }
 
-func SignUp(c *gin.Context) {
-	var SignUpRequest usersDomain.SignUpRequest
-	c.BindJSON(&SignUpRequest)
-	// Hash the password (encrypt)
-	// hash, err := bcrypt.GenerateFromPassword([]byte(SignUpRequest.Password), 10)
-	// if err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{
-	// 		"error": "Failed to hash password",
-	// 	})
-	// }
-	response := usersService.SignUp(SignUpRequest)
-	c.IndentedJSON(response, response)
-}
+// func SignUp(c *gin.Context) {
+// 	var SignUpRequest usersDomain.SignUpRequest
+// 	c.BindJSON(&SignUpRequest)
+// 	// Hash the password (encrypt)
+// 	// hash, err := bcrypt.GenerateFromPassword([]byte(SignUpRequest.Password), 10)
+// 	// if err != nil {
+// 	// 	c.JSON(http.StatusBadRequest, gin.H{
+// 	// 		"error": "Failed to hash password",
+// 	// 	})
+// 	// }
+// 	// response := usersService.SignUp(SignUpRequest)
+// 	c.IndentedJSON(response, response)
+// }
