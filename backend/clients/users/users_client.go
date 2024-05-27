@@ -16,7 +16,16 @@ func GetUserById(id int) model.Usuario {
 	return user
 }
 
-// TODO: Get by email
-func GetUserByMail(mail string) {
+func GetUserByUsername(name string) model.Usuario {
+	var user model.Usuario
+	Db.Where("nombre_usuario = ?", name).First(&user)
+	log.Debug("User: ", user)
+	return user
+}
 
+func GetUserByMail(mail string) model.Usuario {
+	var user model.Usuario
+	Db.Where("correo_electronico = ?", mail).First(&user)
+	log.Debug("User: ", user)
+	return user
 }

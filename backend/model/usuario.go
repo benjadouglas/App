@@ -12,4 +12,5 @@ type Usuario struct {
 	Contrasena         string `gorm:"type:varchar(250);not null"`
 	Fecha_Registro     time.Time
 	Is_Admin           bool
+	Nombre_Usuario     string `gorm:"type:varchar(250);not null"`
 }
