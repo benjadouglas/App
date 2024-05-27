@@ -1,4 +1,4 @@
-package clients
+package cursos
 
 import (
 	"gorm.io/gorm"

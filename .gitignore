@@ -1,5 +1,5 @@
 .DS_STORE
 tmp
-backend/passw
+backend/passw/
 .idea/
 .vscode/

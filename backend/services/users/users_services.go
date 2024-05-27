@@ -10,10 +10,10 @@ func Login(request users.LoginRequest) users.LoginResponse {
 	db.StartDbEngine()
 	user := client.GetUserByUsername(request.Username)
 	if user.Nombre_Usuario == "" {
-		return users.LoginResponse{Token: "404 Not Found"}
+		return users.LoginResponse{Token: "404"} // User not found
 	} else if user.Contrasena != request.Password {
-		return users.LoginResponse{Token: "401 Not Authorized"}
+		return users.LoginResponse{Token: "401"} // Wrong password
 	} else {
-		return users.LoginResponse{Token: "200 OK"}
+		return users.LoginResponse{Token: "200"} // OK
 	}
 }
