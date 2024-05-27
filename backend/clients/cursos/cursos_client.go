@@ -5,3 +5,5 @@ import (
 )
 
 var Db *gorm.DB
+
+// TODO: Agregar funciones para interactuar con la base de datos
