@@ -1,0 +1,14 @@
+.course-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Espacio entre las cajas */
+    padding: 20px;
+  }
+  
+  .course-grid::after {
+    content: '';
+    flex-basis: 250px; /* Tamaño mínimo de las cajas */
+    flex-grow: 999; /* Asegura que las cajas se distribuyan correctamente */
+  }
+  
