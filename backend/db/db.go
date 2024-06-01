@@ -1,7 +1,7 @@
 package db
 
 import (
-	inscripcionClient "backend/clients/inscripcion"
+	inscripcionClient "backend/clients/inscripciones"
 	usersClient "backend/clients/users"
 	"backend/model"
 	"backend/passw"

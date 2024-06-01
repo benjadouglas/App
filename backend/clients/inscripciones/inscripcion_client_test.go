@@ -1,6 +1,7 @@
-package inscripciones
+package inscripciones_test
 
 import (
+	"backend/clients/inscripciones"
 	"backend/model"
 	"testing"
 )
