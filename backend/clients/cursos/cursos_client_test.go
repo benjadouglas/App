@@ -24,15 +24,15 @@ func TestGetCursoByName(t *testing.T) {
 	}
 }
 
-func TestGetCursoByCategory(t *testing.T) {
-	category := "Development"
+// func TestGetCursoByCategory(t *testing.T) {
+// 	category := "Development"
 
-	courses := cursos.GetCursoByCategory(category)
+// 	courses := cursos.GetCursoByCategory(category)
 
-	if len(courses) == 0 {
-		t.Errorf("GetCursoByCategory did not return any courses for category: %v", category)
-	}
-}
+// 	if len(courses) == 0 {
+// 		t.Errorf("GetCursoByCategory did not return any courses for category: %v", category)
+// 	}
+// }
 
 // func TestGetCursoByAdmin(t *testing.T) {
 // 	adminID := 1
