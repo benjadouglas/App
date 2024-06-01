@@ -1,17 +1,10 @@
 import React from 'react';
+import './Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <p>&copy; 2024 Your Company Name</p>
-      <ul className="footer-links">
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-      </ul>
-      <div className="footer-social">
-        {/* Add social media links here */}
-      </div>
+    <footer>
+      <p>&copy; 2024 - All rights reserved by DG</p>
     </footer>
   );
 };

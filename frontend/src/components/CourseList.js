@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCourses } from '../hooks/useCourses';
 import SearchBar from './SearchBar';
 import CourseCard from './CourseCard';
-import CourseCard from './CourseCard';
+
 
 
 const CourseList = () => {

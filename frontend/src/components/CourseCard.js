@@ -1,14 +1,11 @@
 import React from 'react';
+import './CourseCard.css'; // Estilos específicos para las tarjetas de cursos
 
-const CourseCard = ({ title, image, description, buttonText, onClick }) => {
+const CourseCard = ({ course }) => {
   return (
     <div className="course-card">
-      <img src={image} alt={title} />
-      <div className="course-info">
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
-      <button onClick={onClick}>{buttonText}</button>
+      <h2>{course.title}</h2>
+      <p>{course.description}</p>
     </div>
   );
 };
