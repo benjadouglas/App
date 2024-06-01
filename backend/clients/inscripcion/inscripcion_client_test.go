@@ -1,11 +1,14 @@
-package inscripciones
+package inscripciones_test
 
 import (
+	inscripciones "backend/clients/inscripcion"
+	"backend/db"
 	"backend/model"
 	"testing"
 )
 
 func TestCrearInscripcion(t *testing.T) {
+	db.StartDbEngine()
 	userId := 1
 	courseId := 2
 

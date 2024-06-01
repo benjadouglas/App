@@ -1,6 +1,7 @@
 package db
 
 import (
+	cursosClient "backend/clients/cursos"
 	inscripcionClient "backend/clients/inscripcion"
 	usersClient "backend/clients/users"
 	"backend/model"
@@ -36,11 +37,11 @@ func init() {
 
 	usersClient.Db = Db
 	inscripcionClient.Db = Db
-	// cursosClient.Db = Db
+	cursosClient.Db = Db
 }
 
 func StartDbEngine() {
 	Db.AutoMigrate(&model.Usuario{})
 	Db.AutoMigrate(&model.Inscripcion{})
-	// db.AutoMigrate(&model.Curso{})
+	Db.AutoMigrate(&model.Curso{})
 }
