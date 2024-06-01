@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
 import placeholder from "@/public/placeholder.svg";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,9 +21,11 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button>Sign Up</Button>
+                  <Button className="bg-black text-white">
+                    <Link href="/signIn"> Sign In</Link>
+                  </Button>
                   <Button variant="secondary" className="w-full sm:w-auto">
-                    Log In
+                    <Link href="/signUp"> Sign Up</Link>
                   </Button>
                 </div>
               </div>

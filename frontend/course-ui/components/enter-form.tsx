@@ -26,8 +26,6 @@ export function EnterForm({ isCreatingAccount }: Props) {
     title = "Sign in";
   }
 
-  function handleSignIn(event: FormEventHandler<HTMLButtonElement>) {}
-
   return (
     <Card>
       <CardHeader className="space-y-1">
