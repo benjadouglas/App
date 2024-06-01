@@ -2,7 +2,7 @@ package db
 
 import (
 	cursosClient "backend/clients/cursos"
-	inscripcionClient "backend/clients/inscripcion"
+	inscripcionClient "backend/clients/inscripciones"
 	usersClient "backend/clients/users"
 	"backend/model"
 	"backend/passw"
