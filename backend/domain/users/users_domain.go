@@ -3,7 +3,7 @@ package users
 type SignUpRequest struct {
 	Mail     string `json:"mail"`
 	Username string `json:"username"`
-	Password string `json :"password"`
+	Password string `json:"password"`
 }
 
 type User struct {
@@ -11,10 +11,10 @@ type User struct {
 }
 
 type LoginRequest struct {
-	Username string `json :"username"`
-	Password string `json :"password"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 type LoginResponse struct {
-	Token string `json :"token"`
+	Token string `json:"token"`
 }
