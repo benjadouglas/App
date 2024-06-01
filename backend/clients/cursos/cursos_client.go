@@ -18,10 +18,10 @@ func GetCursoById(id int) model.Curso {
 
 func GetCursoByName(name string) model.Curso { // Introduction to Programming
 	var curso model.Curso
-	err := Db.Where("nombre_curso = ?", name).First(&curso)
-	if err != nil {
-		return model.Curso{}
-	}
+	Db.Where("nombre_curso = ?", name).First(&curso)
+	// if err != nil {
+	// 	return model.Curso{}
+	// }
 	log.Debug("Course: ", curso)
 	return curso
 }
@@ -33,9 +33,9 @@ func GetCursoByCategory(category string) []model.Curso {
 	return cursos
 }
 
-func GetCursoByAdmin(adminId int) []model.Curso {
-	var cursos []model.Curso
-	Db.Where("id_admin = ? AND is_admin = true", adminId).Find(&cursos)
-	log.Debug("Courses: ", cursos)
-	return cursos
-}
+// func GetCursoByAdmin(adminId int) []model.Curso {
+// 	var cursos []model.Curso
+// 	Db.Where("id_admin = ? AND is_admin = true", adminId).Find(&cursos)
+// 	log.Debug("Courses: ", cursos)
+// 	return cursos
+// }
