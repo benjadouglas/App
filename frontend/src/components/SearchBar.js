@@ -1,3 +1,4 @@
+// src/components/SearchBar.js
 import React, { useState } from 'react';
 
 const SearchBar = ({ onSearch }) => {
@@ -5,17 +6,17 @@ const SearchBar = ({ onSearch }) => {
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearch(searchTerm);
+    onSearch(event.target.value); // Llama a onSearch en cada cambio de entrada
   };
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
-      <input type="text" value={searchTerm} onChange={handleChange} placeholder="Search courses..." />
-      <button type="submit">Search</button>
+    <form className="search-bar">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleChange}
+        placeholder="Search courses..."
+      />
     </form>
   );
 };
