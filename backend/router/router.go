@@ -8,4 +8,5 @@ import (
 
 func MapUrls(engine *gin.Engine) {
 	engine.POST("/users/login", users.SignIn)
+	engine.POST("/user/signup", users.SignUp)
 }

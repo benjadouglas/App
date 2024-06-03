@@ -1,13 +1,14 @@
 // src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/Home';
-import MyCoursesPage from './pages/MyCourses';
-import CourseDetailPage from './pages/CourseDetailPage';
-import Login from './components/Login';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomePage from "./pages/Home";
+import MyCoursesPage from "./pages/MyCourses";
+import CourseDetailPage from "./pages/CourseDetailPage";
+import Login from "./components/Login";
+import "./App.css";
+import SignUp from "./components/signUp";
 
 const App = () => {
   return (
@@ -19,7 +20,9 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/my-courses" element={<MyCoursesPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/courses/:id" element={<CourseDetailPage />} /> {/* Nueva ruta para detalles del curso */}
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/courses/:id" element={<CourseDetailPage />} />{" "}
+            {/* Nueva ruta para detalles del curso */}
           </Routes>
         </main>
         <Footer />
