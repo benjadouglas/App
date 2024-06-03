@@ -1,7 +1,7 @@
 package inscripciones_test
 
 import (
-	inscripciones "backend/clients/inscripcion"
+	"backend/clients/inscripciones"
 	"backend/db"
 	"backend/model"
 	"testing"
@@ -12,7 +12,7 @@ func TestCrearInscripcion(t *testing.T) {
 	userId := 1
 	courseId := 2
 
-	inscripcion := model.Inscripcion{ID_Usuario: userId, ID_Curso: courseId}
+	inscripcion := model.Inscripcion{Id_Usuario: userId, ID_Curso: courseId}
 
 	err := inscripciones.CrearInscripcion(inscripcion)
 
@@ -24,9 +24,9 @@ func TestCrearInscripcion(t *testing.T) {
 func TestGetInscripcionesByUserId(t *testing.T) {
 	userId := 1
 
-	inscripciones := inscripciones.GetInscripcionesByUserId(userId)
+	inscripcionesT := inscripciones.GetInscripcionesByUserId(userId)
 
-	if len(inscripciones) == 0 {
+	if len(inscripcionesT) == 0 {
 		t.Errorf("GetInscripcionesByUserId did not return any inscriptions for user ID: %v", userId)
 	}
 }
@@ -34,9 +34,9 @@ func TestGetInscripcionesByUserId(t *testing.T) {
 func TestGetInscripcionesByCursoId(t *testing.T) {
 	courseId := 2
 
-	inscripciones := inscripciones.GetInscripcionesByCursoId(courseId)
+	inscripcionesT := inscripciones.GetInscripcionesByCursoId(courseId)
 
-	if len(inscripciones) == 0 {
+	if len(inscripcionesT) == 0 {
 		t.Errorf("GetInscripcionesByCursoId did not return any inscriptions for course ID: %v", courseId)
 	}
 }

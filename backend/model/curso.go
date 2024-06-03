@@ -10,5 +10,4 @@ type Curso struct {
 	Precio       float64   `gorm:"decimal(10,2);not null"`
 	Fecha_Inicio time.Time `gorm:"type:date"`
 	Fecha_Fin    time.Time `gorm:"type:date"`
-	// Imagen_Curso    []byte
 }
