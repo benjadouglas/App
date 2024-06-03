@@ -4,22 +4,26 @@ import (
 	client "backend/clients/users"
 	"backend/db"
 	"backend/domain/users"
+	"backend/model"
+	"net/http"
 	"os"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/golang-jwt/jwt"
 )
 
 func Login(request users.LoginRequest) users.LoginResponse {
 	db.StartDbEngine()
-	user := client.GetUserByMail(request.Username)
-	if user.Nombre_Usuario == "" {
+	someUser := client.GetUserByUsername(request.Username)
+	if someUser.Nombre_Usuario == "" {
 		return users.LoginResponse{Code: 404} // User not found
-	} else if user.Contrasena != request.Password {
+	} else if bcrypt.CompareHashAndPassword([]byte(someUser.Contrasena), []byte(request.Password)) != nil {
 		return users.LoginResponse{Code: 401} // Wrong password
-	} else {
+	} else if bcrypt.CompareHashAndPassword([]byte(someUser.Contrasena), []byte(request.Password)) == nil {
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-			"sub": user.Id_usuario,
+			"sub": someUser.Id_usuario,
 			"nbf": time.Now().Add(time.Hour * 24 * 2).Unix(),
 		})
 
@@ -29,4 +33,26 @@ func Login(request users.LoginRequest) users.LoginResponse {
 		}
 		return users.LoginResponse{Code: 200, Token: tokenString} // OK
 	}
+	return users.LoginResponse{Code: 400}
+}
+
+func SignUp(request users.SignUpRequest) int {
+	db.StartDbEngine()
+	hashPasw, err := bcrypt.GenerateFromPassword([]byte(request.Password), 10)
+
+	if err != nil {
+		return http.StatusBadRequest
+	}
+
+	result := client.CreateUser(&model.Usuario{
+		Nombre_Usuario:     request.Username,
+		Correo_Electronico: request.Mail,
+		Contrasena:         string(hashPasw),
+		Fecha_Registro:     time.Now(),
+		Is_Admin:           false,
+	})
+	if result == nil {
+		return 200
+	}
+	return 400
 }

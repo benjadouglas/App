@@ -15,7 +15,7 @@ export const handleLogin = async (Username, Password) => {
   return response;
 };
 
-export const handleSignUp = async (Username, Email, Password) => {
+export const handleSignUp = async (Username, Mail, Password) => {
   const response = fetch("http://localhost:8080/users/login", {
     mode: "no-cors",
     method: "POST",
@@ -24,7 +24,7 @@ export const handleSignUp = async (Username, Email, Password) => {
     },
     body: JSON.stringify({
       Username: `${Username}`,
-      Email: `${Email}`,
+      Mail: `${Mail}`,
       Password: `${Password}`,
     }),
   })

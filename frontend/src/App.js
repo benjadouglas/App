@@ -8,7 +8,7 @@ import MyCoursesPage from "./pages/MyCourses";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import Login from "./components/Login";
 import "./App.css";
-import SignUp from "./components/signUp";
+import SignUp from "./components/SignUp";
 
 const App = () => {
   return (

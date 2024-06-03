@@ -6,10 +6,6 @@ type SignUpRequest struct {
 	Password string `json:"password"`
 }
 
-type User struct {
-	SignUpRequest
-}
-
 type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`

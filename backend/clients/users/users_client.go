@@ -28,3 +28,11 @@ func GetUserByMail(mail string) model.Usuario {
 	// log.Debug("User: ", user) // Decomment this line to see info about the request
 	return user
 }
+
+func CreateUser(data *model.Usuario) error {
+	response := Db.Create(&data)
+	if response.Error != nil {
+		return Db.Error
+	}
+	return nil
+}
