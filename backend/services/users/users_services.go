@@ -1,27 +1,19 @@
 package users
 
 import (
+	client "backend/clients/users"
+	"backend/db"
 	"backend/domain/users"
-	"log"
 )
 
-var usersArr = []users.LoginRequest{
-	{Username: "benja", Password: "passw"},
-}
-
 func Login(request users.LoginRequest) users.LoginResponse {
-	for _, a := range usersArr {
-		log.Printf("expected: %s, got: %s", a.Username, request.Username)
-		if a.Username == request.Username {
-			if a.Password == request.Password {
-				return users.LoginResponse{Token: "200"}
-			} else {
-				return users.LoginResponse{Token: "401"}
-			}
-		}
+	db.StartDbEngine()
+	user := client.GetUserByUsername(request.Username)
+	if user.Nombre_Usuario == "" {
+		return users.LoginResponse{Token: "404"} // User not found
+	} else if user.Contrasena != request.Password {
+		return users.LoginResponse{Token: "401"} // Wrong password
+	} else {
+		return users.LoginResponse{Token: "200"} // OK
 	}
-	return users.LoginResponse{Token: "404"}
 }
-
-// func SignUp(request users.SignUpRequest) int {
-// }

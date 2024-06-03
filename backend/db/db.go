@@ -2,7 +2,7 @@ package db
 
 import (
 	cursosClient "backend/clients/cursos"
-	inscripcionClient "backend/clients/inscripcion"
+	inscripcionClient "backend/clients/inscripciones"
 	usersClient "backend/clients/users"
 	"backend/model"
 	"backend/passw"
@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	db  *gorm.DB
+	Db  *gorm.DB
 	err error
 )
 
@@ -26,7 +26,7 @@ func init() {
 	DBHost := "127.0.0.1"
 	dsn := DBUser + ":" + DBPass + "@tcp(" + DBHost + ":3306)/" + DBName + "?charset=utf8&parseTime=True"
 
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	Db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Info("Error connecting to database")
@@ -35,13 +35,13 @@ func init() {
 		log.Info("Connection stablished to database")
 	}
 
-	usersClient.Db = db
-	inscripcionClient.Db = db
-	cursosClient.Db = db
+	usersClient.Db = Db
+	inscripcionClient.Db = Db
+	cursosClient.Db = Db
 }
 
 func StartDbEngine() {
-	db.AutoMigrate(&model.Usuario{})
-	// db.AutoMigrate(&model.Inscripcion{})
-	// db.AutoMigrate(&model.Curso{})
+	Db.AutoMigrate(&model.Usuario{})
+	Db.AutoMigrate(&model.Inscripcion{})
+	Db.AutoMigrate(&model.Curso{})
 }

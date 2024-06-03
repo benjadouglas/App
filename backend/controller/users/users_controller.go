@@ -21,7 +21,7 @@ func SignIn(c *gin.Context) {
 	c.IndentedJSON(i, response)
 }
 
-// func SignUp(c *gin.Context) {
+// fun SignUp(c *gin.Context) {
 // 	var SignUpRequest usersDomain.SignUpRequest
 // 	c.BindJSON(&SignUpRequest)
 // 	// Hash the password (encrypt)
