@@ -3,10 +3,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useCourses from '../hooks/useCourses';
 import CourseDetail from '../components/CourseDetail';
+import useUser from '../hooks/useUser';
 
 const CourseDetailPage = () => {
   const { id } = useParams();
   const { courses, loading, error } = useCourses();
+  const { enrollInCourse } = useUser();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -16,13 +18,17 @@ const CourseDetailPage = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const course = courses.find(course => course.id === parseInt(id));
+  const course = courses.find(course => course.id === parseInt(id, 10));
 
   if (!course) {
     return <div>Course not found</div>;
   }
 
-  return <CourseDetail course={course} />;
+  const handleEnroll = (courseId) => {
+    enrollInCourse(courseId);
+  };
+
+  return <CourseDetail course={course} onEnroll={handleEnroll} />;
 };
 
 export default CourseDetailPage;

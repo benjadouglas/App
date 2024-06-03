@@ -1,6 +1,7 @@
+// src/components/CourseDetail.js
 import React from 'react';
 
-const CourseDetail = ({ course }) => {
+const CourseDetail = ({ course, onEnroll }) => {
   if (!course) {
     return <div>Course not found</div>;
   }
@@ -17,7 +18,7 @@ const CourseDetail = ({ course }) => {
         <p><b>Requirements:</b> {requirements}</p>
         <p><b>Material:</b> {material}</p>
       </div>
-      {/* Add additional details as needed */}
+      <button onClick={() => onEnroll(course.id)}>Enroll</button>
     </div>
   );
 };

@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
-// import { loginUser } from '../Api/Users';
+// src/hooks/useUser.js
+import { useState } from 'react';
 
-const useUser = (credentials) => {
-  const [user, setUser] = useState(null);
+const useUser = () => {
+  const [user, setUser] = useState({
+    enrolledCourses: [], // Cursos en los que el usuario está inscrito
+  });
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await loginUser(credentials);
-      setUser(user);
-    };
-
-    if (credentials) {
-      fetchUser();
+  const enrollInCourse = (courseId) => {
+    if (!user.enrolledCourses.includes(courseId)) {
+      setUser((prevUser) => ({
+        ...prevUser,
+        enrolledCourses: [...prevUser.enrolledCourses, courseId],
+      }));
     }
-  }, [credentials]);
+  };
 
-  return user;
+  return { user, enrollInCourse };
 };
 
 export default useUser;
