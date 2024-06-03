@@ -2,6 +2,7 @@ package inscripciones
 
 import (
 	"backend/model"
+	"time"
 
 	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
@@ -10,6 +11,9 @@ import (
 var Db *gorm.DB
 
 func CrearInscripcion(inscripcion model.Inscripcion) error {
+	currentDate := time.Now()
+	inscripcion.FechaInscripcion = currentDate
+
 	err := Db.Create(&inscripcion).Error
 	if err != nil {
 		log.Error("Error creating inscription:", err)
