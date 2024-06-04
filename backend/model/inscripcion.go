@@ -1,10 +1,14 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type Inscripcion struct {
 	ID_Inscripcion   int       `gorm:"type:int;primaryKey;not null"`
 	Id_Usuario       int       `gorm:"type:int;not null"`
 	ID_Curso         int       `gorm:"type:int;not null"`
-	FechaInscripcion time.Time `gorm:"type:datetime"`
+	FechaInscripcion time.Time `gorm:"type:date"`
+	//Curso            Curso     `gorm:"foreignKey:IDCurso;references:ID"`
+	//Usuario          Usuario   `gorm:"foreignKey:IDUsuario;references:ID"`
 }
