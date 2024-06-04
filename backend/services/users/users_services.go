@@ -2,10 +2,7 @@ package users
 
 import (
 	client "backend/clients/users"
-	"backend/db"
 	"backend/domain/users"
-	"backend/model"
-	"net/http"
 	"os"
 	"time"
 
@@ -15,8 +12,8 @@ import (
 )
 
 func Login(request users.LoginRequest) users.LoginResponse {
-	db.StartDbEngine()
 	someUser := client.GetUserByUsername(request.Username)
+
 	if someUser.Nombre_Usuario == "" {
 		return users.LoginResponse{Code: 404} // User not found
 	} else if bcrypt.CompareHashAndPassword([]byte(someUser.Contrasena), []byte(request.Password)) != nil {
@@ -31,28 +28,11 @@ func Login(request users.LoginRequest) users.LoginResponse {
 		if err != nil {
 			return users.LoginResponse{Code: 400}
 		}
-		return users.LoginResponse{Code: 200, Token: tokenString} // OK
+		return users.LoginResponse{Code: 200, Token: tokenString}
 	}
 	return users.LoginResponse{Code: 400}
 }
 
 func SignUp(request users.SignUpRequest) int {
-	db.StartDbEngine()
-	hashPasw, err := bcrypt.GenerateFromPassword([]byte(request.Password), 10)
-
-	if err != nil {
-		return http.StatusBadRequest
-	}
-
-	result := client.CreateUser(&model.Usuario{
-		Nombre_Usuario:     request.Username,
-		Correo_Electronico: request.Mail,
-		Contrasena:         string(hashPasw),
-		Fecha_Registro:     time.Now(),
-		Is_Admin:           false,
-	})
-	if result == nil {
-		return 200
-	}
-	return 400
+	return client.CreateUser(request)
 }

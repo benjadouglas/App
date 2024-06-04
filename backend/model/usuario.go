@@ -6,7 +6,7 @@ import "time"
 // admin tener una sola tabla con un campo IsAdmin
 
 type Usuario struct {
-	Id_usuario         int       `gorm:"type:int;primaryKey;not null"`
+	Id_usuario         int       `gorm:"type:int;primaryKey;autoIncrement;not null"`
 	Nombre_Usuario     string    `gorm:"type:varchar(250);not null"`
 	Correo_Electronico string    `gorm:"type:varchar(250);not null"`
 	Contrasena         string    `gorm:"type:varchar(250);not null"`

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { handleSignUp } from "../api/Users";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const response = handleSignUp(username, mail, password);
+    console.log(response);
+  };
 
   return (
     <div className="signup-container" style={{ textAlign: "center" }}>
@@ -23,12 +28,12 @@ const SignUp = () => {
           onChange={(e) => setUsername(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="mail">Email:</label>
         <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="mail"
+          id="mail"
+          value={mail}
+          onChange={(e) => setMail(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
         <label htmlFor="password">Password:</label>

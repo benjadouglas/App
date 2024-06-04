@@ -9,6 +9,7 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import Login from "./components/Login";
 import "./App.css";
 import SignUp from "./components/SignUp";
+import LoginUsername from "./components/LoginUsername";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/my-courses" element={<MyCoursesPage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/loginu" element={<LoginUsername />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/courses/:id" element={<CourseDetailPage />} />{" "}
             {/* Nueva ruta para detalles del curso */}

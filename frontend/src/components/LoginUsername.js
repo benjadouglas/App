@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { handleLogin } from "../api/Users";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
+const LoginUsername = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const response = handleLogin(email, password);
+    const response = handleLogin(username, password);
     console.log(response);
   };
 
@@ -19,12 +19,12 @@ const Login = () => {
         onSubmit={handleSubmit}
         style={{ maxWidth: "300px", margin: "0 auto" }}
       >
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="username">Username:</label>
         <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
         <label htmlFor="password">Password:</label>
@@ -56,4 +56,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginUsername;
