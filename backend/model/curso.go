@@ -4,7 +4,7 @@ import "time"
 
 // Acordarse que los nombres de las variables tienen que coincidir con el nombre de las tablas de la base de datos
 type Curso struct {
-	ID_Curso     int       `gorm:"primaryKey"`
+	ID_Curso     int       `gorm:"type:int;primaryKey;not null"`
 	Nombre_curso string    `gorm:"type:varchar(250);not null"`
 	Descripcion  string    `gorm:"type:text"`
 	Precio       float64   `gorm:"decimal(10,2);not null"`
