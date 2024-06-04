@@ -16,7 +16,7 @@ func TestGetCursoById(t *testing.T) {
 }
 
 func TestGetCursoByName(t *testing.T) {
-	courseName := "Introducción a la programación"
+	courseName := "Análisis de datos con Python"
 	curso := cursos.GetCursoByName(courseName)
 	if curso.Nombre_curso != courseName {
 		t.Errorf("GetCursoByName returned incorrect name. Expected: %v, Got: %v", courseName, curso.Nombre_curso)
