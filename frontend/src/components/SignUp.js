@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { handleSignUp } from "../api/Users";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
-  const [mail, setMail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = handleSignUp(username, mail, password);
-    console.log(response);
+    const response = await handleSignUp(username, email, password);
+    if (response.success) {
+      const userData = { email }; // Simulación de datos de usuario
+      login(userData);
+      navigate('/');
+    } else {
+      console.error('Error signing up:', response.error);
+    }
   };
 
   return (
@@ -28,12 +37,12 @@ const SignUp = () => {
           onChange={(e) => setUsername(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
-        <label htmlFor="mail">Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
-          type="mail"
-          id="mail"
-          value={mail}
-          onChange={(e) => setMail(e.target.value)}
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
         <label htmlFor="password">Password:</label>
