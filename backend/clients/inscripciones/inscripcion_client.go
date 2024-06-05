@@ -23,19 +23,19 @@ func CrearInscripcion(inscripcion model.Inscripcion) error {
 	return nil
 }
 
-func GetInscripcionesByUserId(userId int) []model.Inscripcion {
-	var inscripciones []model.Inscripcion
-	Db.Where("id_usuario = ?", userId).Preload("Curso").Find(&inscripciones)
-	log.Debug("Inscripciones: ", inscripciones)
-	return inscripciones
-}
+//func GetInscripcionesByUserId(userId int) []model.Inscripcion {
+//	var inscripciones []model.Inscripcion
+//	Db.Where("id_usuario = ?", userId).Preload("Curso").Find(&inscripciones)
+//	log.Debug("Inscripciones: ", inscripciones)
+//	return inscripciones
+//}
 
-func GetInscripcionesByCursoId(courseId int) []model.Inscripcion {
-	var inscripciones []model.Inscripcion
-	Db.Where("id_curso = ?", courseId).Preload("Usuario").Find(&inscripciones)
-	log.Debug("Inscripciones: ", inscripciones)
-	return inscripciones
-}
+//func GetInscripcionesByCursoId(courseId int) []model.Inscripcion {
+//	var inscripciones []model.Inscripcion
+//	Db.Where("id_curso = ?", courseId).Preload("Usuario").Find(&inscripciones)
+//	log.Debug("Inscripciones: ", inscripciones)
+//	return inscripciones
+//}
 
 func DeleteInscripcionById(inscriptionId int) error {
 	err := Db.Delete(&model.Inscripcion{ID_Inscripcion: inscriptionId}).Error
