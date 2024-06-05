@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type Inscripcion struct {
+type Inscripciones struct {
 	ID_Inscripcion   int       `gorm:"type:int;primaryKey;not null"`
 	Id_Usuario       int       `gorm:"type:int;not null"`
 	ID_Curso         int       `gorm:"type:int;not null"`

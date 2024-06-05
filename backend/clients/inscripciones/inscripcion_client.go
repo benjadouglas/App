@@ -10,7 +10,7 @@ import (
 
 var Db *gorm.DB
 
-func CrearInscripcion(inscripcion model.Inscripcion) error {
+func CrearInscripcion(inscripcion model.Inscripciones) error {
 	currentDate := time.Now()
 	inscripcion.FechaInscripcion = currentDate
 
@@ -23,12 +23,12 @@ func CrearInscripcion(inscripcion model.Inscripcion) error {
 	return nil
 }
 
-//func GetInscripcionesByUserId(userId int) []model.Inscripcion {
-//	var inscripciones []model.Inscripcion
-//	Db.Where("id_usuario = ?", userId).Preload("Curso").Find(&inscripciones)
-//	log.Debug("Inscripciones: ", inscripciones)
-//	return inscripciones
-//}
+func GetInscripcionesByUserId(userId int) []model.Inscripciones {
+	var inscripciones []model.Inscripciones
+	Db.Where("id_usuario = ?", userId).Preload("Curso").Find(&inscripciones)
+	log.Debug("Inscripciones: ", inscripciones)
+	return inscripciones
+}
 
 //func GetInscripcionesByCursoId(courseId int) []model.Inscripcion {
 //	var inscripciones []model.Inscripcion
@@ -38,7 +38,7 @@ func CrearInscripcion(inscripcion model.Inscripcion) error {
 //}
 
 func DeleteInscripcionById(inscriptionId int) error {
-	err := Db.Delete(&model.Inscripcion{ID_Inscripcion: inscriptionId}).Error
+	err := Db.Delete(&model.Inscripciones{ID_Inscripcion: inscriptionId}).Error
 	if err != nil {
 		log.Error("Error deleting inscription:", err)
 		return err

@@ -50,7 +50,7 @@ func CreateUser(data usersDomain.SignUpRequest) int {
 		Correo_Electronico: data.Mail,
 		Contrasena:         string(hashPasw),
 		Fecha_Registro:     time.Now(),
-		Is_Admin:           false,
+		Is_Admin:           data.IsAdmin,
 	}
 	result := Db.Create(&userM)
 	if result.Error != nil {

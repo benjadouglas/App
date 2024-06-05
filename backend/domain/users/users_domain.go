@@ -4,6 +4,7 @@ type SignUpRequest struct {
 	Mail     string `json:"mail"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	IsAdmin  bool   `json:"isadmin"`
 }
 
 type LoginRequest struct {

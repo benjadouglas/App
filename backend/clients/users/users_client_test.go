@@ -5,8 +5,16 @@ import (
 	"backend/db"
 	domain "backend/domain/users"
 	"log"
+	"os"
 	"testing"
 )
+
+func TestAso(t *testing.T) {
+	res := os.Getenv("SECRET")
+	if res != "asdfvio314iasdfnv32" {
+		t.Errorf("Result was incorrect, got: %s, want %s.", res, "asdfvio314iasdfnv32")
+	}
+}
 
 func TestGetUserById(t *testing.T) {
 	db.StartDbEngine()

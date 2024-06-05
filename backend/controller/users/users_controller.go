@@ -12,7 +12,9 @@ func SignIn(c *gin.Context) {
 	var loginRequest usersDomain.LoginRequest
 	c.BindJSON(&loginRequest)
 	response := usersService.Login(loginRequest)
-	c.IndentedJSON(response.Code, response.Code)
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("Authorization", response.Token, 3600*24*30, "", "", false, true)
+	c.IndentedJSON(response.Code, response)
 }
 
 func SignUp(c *gin.Context) {

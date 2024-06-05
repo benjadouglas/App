@@ -12,7 +12,7 @@ func TestCrearInscripcion(t *testing.T) {
 	userId := 1
 	courseId := 2
 
-	inscripcion := model.Inscripcion{Id_Usuario: userId, ID_Curso: courseId}
+	inscripcion := model.Inscripciones{Id_Usuario: userId, ID_Curso: courseId}
 
 	err := inscripciones.CrearInscripcion(inscripcion)
 
@@ -21,15 +21,15 @@ func TestCrearInscripcion(t *testing.T) {
 	}
 }
 
-//func TestGetInscripcionesByUserId(t *testing.T) {
-//	userId := 1
-//
-//	inscripcion := inscripciones.GetInscripcionesByUserId(userId)
-//
-//	if len(inscripcion) == 0 {
-//		t.Errorf("GetInscripcionesByUserId did not return any inscriptions for user ID: %v", userId)
-//	}
-//} // no paso test
+func TestGetInscripcionesByUserId(t *testing.T) {
+	userId := 1
+
+	inscripcion := inscripciones.GetInscripcionesByUserId(userId)
+
+	if len(inscripcion) != 3 {
+		t.Errorf("Expected 3, got %#v", len(inscripcion))
+	}
+}
 
 //func TestGetInscripcionesByCursoId(t *testing.T) {
 //	courseId := 2

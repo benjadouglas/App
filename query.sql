@@ -53,11 +53,11 @@ INSERT INTO cursos (nombre_curso, descripcion, precio, fecha_inicio, fecha_fin) 
 
 -- Inserción de datos en la tabla inscripciones
 INSERT INTO inscripciones (id_usuario, id_curso) VALUES
-(1, 1), -- John Doe inscrito en Introducción a la programación
-(2, 2), -- Jane Smith inscrita en Análisis de datos con Python
-(3, 3), -- Alice Johnson inscrita en Desarrollo web con Go
-(4, 1), -- Bob Brown inscrito en Introducción a la programación
-(5, 4), -- Charlie Davis inscrito en Fundamentos de Machine Learning
-(6, 2), -- Daisy Evans inscrita en Análisis de datos con Python
-(8, 3)  -- Grace Ford inscrita en Desarrollo web con Go
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(4, 1), 
+(5, 4), 
+(6, 2), 
+(8, 3)  
 ;

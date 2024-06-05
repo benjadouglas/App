@@ -41,6 +41,6 @@ func init() {
 
 func StartDbEngine() {
 	Db.AutoMigrate(&model.Usuario{})
-	Db.AutoMigrate(&model.Inscripcion{})
+	Db.AutoMigrate(&model.Inscripciones{})
 	Db.AutoMigrate(&model.Curso{})
 }

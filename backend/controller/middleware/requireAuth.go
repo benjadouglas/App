@@ -3,8 +3,8 @@ package middleware
 import (
 	userClient "backend/clients/users"
 	"fmt"
+	"log"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -19,24 +19,26 @@ func RequireAuth(c *gin.Context) {
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signin method %v", token.Header["alg"])
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
-		return []byte(os.Getenv("SECRET")), nil
+		return []byte("asdfvio314iasdfnv32"), nil
 	})
+	if err != nil {
+		log.Println(err)
+		c.AbortWithStatus(http.StatusUnauthorized)
+	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		if time.Now().Unix() > claims["exp"].(int64) {
+		if float64(time.Now().Unix()) > claims["exp"].(float64) {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
-		user := userClient.GetUserById(claims["sub"].(int))
+		user := userClient.GetUserById(int(claims["sub"].(float64)))
 		if user.Id_usuario == 0 {
 			c.AbortWithStatus(http.StatusUnauthorized)
 		}
 		c.Set("user", user)
 		c.Next()
-		// fmt.Println(claims["foo"], claims["bf"])
 	} else {
 		c.AbortWithStatus(http.StatusUnauthorized)
 	}
-
 }

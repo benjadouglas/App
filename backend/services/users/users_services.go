@@ -3,7 +3,6 @@ package users
 import (
 	client "backend/clients/users"
 	"backend/domain/users"
-	"os"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -21,10 +20,10 @@ func Login(request users.LoginRequest) users.LoginResponse {
 	} else if bcrypt.CompareHashAndPassword([]byte(someUser.Contrasena), []byte(request.Password)) == nil {
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"sub": someUser.Id_usuario,
-			"nbf": time.Now().Add(time.Hour * 24 * 2).Unix(),
+			"exp": time.Now().Add(time.Hour * 24 * 2).Unix(),
 		})
 
-		tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+		tokenString, err := token.SignedString([]byte("asdfvio314iasdfnv32"))
 		if err != nil {
 			return users.LoginResponse{Code: 400}
 		}
