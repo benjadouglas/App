@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { handleLogin } from "../api/Users";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const response = handleLogin(email, password);
-    console.log(response);
+    // Simulate API call to validate user credentials
+    login({ email });
+    navigate('/');
   };
 
   return (
-    <div className="login-container" style={{ textAlign: "center" }}>
+    <div className="login-container" style={{ textAlign: 'center' }}>
       <h2>Login</h2>
-      <form
-        onSubmit={handleSubmit}
-        style={{ maxWidth: "300px", margin: "0 auto" }}
-      >
+      <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: '0 auto' }}>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
         />
         <label htmlFor="password">Password:</label>
         <input
@@ -33,25 +33,24 @@ const Login = () => {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          style={{ width: '100%', padding: '10px', marginBottom: '10px' }}
         />
         <button
           type="submit"
           style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            fontSize: "16px",
-            cursor: "pointer",
+            width: '100%',
+            padding: '10px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            fontSize: '16px',
+            cursor: 'pointer'
           }}
         >
           Login
         </button>
       </form>
-      {/* <p>¿No tienes una cuenta? <Link to="/signup">Regístrate</Link></p> */}
     </div>
   );
 };
