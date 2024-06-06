@@ -13,8 +13,8 @@ func SignIn(c *gin.Context) {
 	c.BindJSON(&loginRequest)
 	response := usersService.Login(loginRequest)
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", response.Token, 3600*24*30, "", "", false, true)
-	c.IndentedJSON(response.Code, response)
+	c.SetCookie("Authorization", response.Token, 3600*24*30, "", "localhost", false, true)
+	c.IndentedJSON(response.Code, response.Code)
 }
 
 func SignUp(c *gin.Context) {

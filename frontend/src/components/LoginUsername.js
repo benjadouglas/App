@@ -1,24 +1,18 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { handleSignUp } from "../api/Users";
+import { getCursos, handleLogin } from "../api/Users";
 
-const SignUp = () => {
+const LoginUsername = () => {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { login } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const response = handleSignUp(username, email, password);
-    console.log(response);
+    handleLogin(username, password);
   };
 
   return (
-    <div className="signup-container" style={{ textAlign: "center" }}>
-      <h2>Signup</h2>
+    <div className="login-container" style={{ textAlign: "center" }}>
+      <h2>Login</h2>
       <form
         onSubmit={handleSubmit}
         style={{ maxWidth: "300px", margin: "0 auto" }}
@@ -29,14 +23,6 @@ const SignUp = () => {
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
         />
         <label htmlFor="password">Password:</label>
@@ -60,11 +46,12 @@ const SignUp = () => {
             cursor: "pointer",
           }}
         >
-          SignUp
+          Login
         </button>
       </form>
+      {/* <p>¿No tienes una cuenta? <Link to="/signup">Regístrate</Link></p> */}
     </div>
   );
 };
 
-export default SignUp;
+export default LoginUsername;

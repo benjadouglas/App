@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetCursos(c *gin.Context) {
+func GetCursosInscriptos(c *gin.Context) {
 	someValue, exists := c.Get("user")
 	var cursosList []model.Curso
 	if exists != true {
@@ -37,4 +37,15 @@ func GetCursos(c *gin.Context) {
 		}
 	}
 	c.IndentedJSON(http.StatusOK, cursosList)
+}
+
+func GetCursos(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, cursos.GetAllCursos())
+}
+
+func CreateCurso(c *gin.Context) {
+	var request model.Curso
+	c.BindJSON(&request)
+	result := cursos.CreateCurso(request)
+	c.IndentedJSON(result, result)
 }
