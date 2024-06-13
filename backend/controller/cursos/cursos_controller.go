@@ -58,3 +58,12 @@ func CreateCurso(c *gin.Context) {
 	result := cursos.CreateCurso(request)
 	c.IndentedJSON(result, result)
 }
+
+func DeleteCurso(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{})
+	}
+	cursos.DeleteCursoById(id)
+	c.IndentedJSON(http.StatusOK, gin.H{})
+}

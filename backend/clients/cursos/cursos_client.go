@@ -39,3 +39,7 @@ func GetCursoByName(name string) model.Curso { // Introduction to Programming
 	log.Debug("Course: ", curso)
 	return curso
 }
+
+func DeleteCursoById(id int) {
+	Db.Where("id_curso = ?", id).Delete(&model.Curso{})
+}

@@ -19,6 +19,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link to="/create-course" className="button-link">
+              Create
+            </Link>
+          </li>
+          <li>
             <Link to="/loginu" className="button-link">
               Login
             </Link>

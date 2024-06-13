@@ -12,11 +12,12 @@ func MapUrls(engine *gin.Engine) {
 
 	engine.POST("/users/login", users.SignIn)
 	engine.POST("/users/signup", users.SignUp)
-	engine.POST("/cursos/", cursos.CreateCurso)
+	engine.POST("/cursos/create", middleware.RequireAuth, cursos.CreateCurso)
 	engine.GET("/cursos/:id", cursos.GetCursoById)
 	engine.GET("/cursos/user", middleware.RequireAuth, cursos.GetCursosInscriptos)
 	engine.GET("/cursos", cursos.GetCursos)
 	engine.GET("/users/validate", middleware.RequireAuth, users.Validate)
+	engine.DELETE("cursos/:id", cursos.DeleteCurso)
 }
 
 // /cursos/create ; fecha tiene que enviarse en un string en este formato:

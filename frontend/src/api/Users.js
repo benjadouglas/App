@@ -85,3 +85,21 @@ export const getAllCursos = async () => {
     console.error(error);
   }
 };
+
+export const createCurso = async (nombre, descripcion, precio) => {
+  try {
+    fetch("http://localhost:8080/cursos/create", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        nombre_curso: nombre,
+        descripcion: descripcion,
+        precio: precio,
+        fecha_inicio: new Date(),
+        fecha_fin: new Date(),
+      }),
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

@@ -11,6 +11,7 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import Home from "./pages/Home";
 import MyCourses from "./pages/MyCourses";
 import ProtectedRoute from "./ProtectedRoute";
+import CreateCourse from "./components/CreateCourse";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/create-course" element={<CreateCourse />} />
               <Route
                 path="/courses/:id"
                 element={
