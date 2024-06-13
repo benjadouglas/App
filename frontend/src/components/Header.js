@@ -28,11 +28,11 @@ const Header = () => {
               Login
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/signup" className="button-link">
               SignUp
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

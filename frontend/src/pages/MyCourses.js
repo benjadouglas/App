@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CourseCard from "../components/CourseCard";
 import { getCursos } from "../api/Users";
 
@@ -12,7 +11,7 @@ const MyCourses = () => {
     const fetchCourses = async () => {
       try {
         const data = await getCursos();
-        setCourses(data);
+        setCourses(data || []); // Ensure that courses is always an array
       } catch (error) {
         setError(error);
       } finally {
@@ -22,8 +21,6 @@ const MyCourses = () => {
 
     fetchCourses();
   }, []);
-
-  useEffect(() => {}, [courses]);
 
   if (loading) {
     return <p>Loading...</p>;
