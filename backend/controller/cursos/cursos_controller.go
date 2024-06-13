@@ -67,3 +67,29 @@ func DeleteCurso(c *gin.Context) {
 	cursos.DeleteCursoById(id)
 	c.IndentedJSON(http.StatusOK, gin.H{})
 }
+
+func InscribirCurso(c *gin.Context) {
+	user, err := c.Get("user")
+	var request model.Inscripciones
+	c.BindJSON(&request)
+	if err != true {
+		c.IndentedJSON(http.StatusUnauthorized, gin.H{
+			"Status": "Not authorized",
+		})
+	}
+	userData, ok := user.(model.Usuario)
+	if ok != true {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{
+			"message": "type assertion failed",
+		})
+	}
+	inscripcionRequest := model.Inscripciones{
+		ID_Usuario: userData.Id_usuario,
+		ID_Curso:   request.ID_Curso,
+	}
+	response := inscripcionesClient.CrearInscripcion(inscripcionRequest)
+	if response != nil {
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{})
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{})
+}

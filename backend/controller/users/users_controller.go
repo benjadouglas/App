@@ -2,6 +2,7 @@ package users
 
 import (
 	usersDomain "backend/domain/users"
+	"backend/model"
 	usersService "backend/services/users"
 	"net/http"
 
@@ -25,7 +26,14 @@ func SignUp(c *gin.Context) {
 }
 
 func Validate(c *gin.Context) {
+	somuser, exists := c.Get("user")
+	if exists == false {
+		c.IndentedJSON(http.StatusUnauthorized, gin.H{
+			"message": "Not authorized",
+		})
+	}
 	c.IndentedJSON(http.StatusOK, gin.H{
 		"message": "Logged in succesfully",
+		"id":      somuser.(model.Usuario).Id_usuario,
 	})
 }

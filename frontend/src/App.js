@@ -34,14 +34,7 @@ const App = () => {
                 }
               />
               <Route path="/create-course" element={<CreateCourse />} />
-              <Route
-                path="/courses/:id"
-                element={
-                  <ProtectedRoute>
-                    <CourseDetailPage />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/courses/:id" element={<CourseDetailPage />} />
             </Routes>
           </main>
           <Footer />

@@ -12,7 +12,7 @@ func TestCrearInscripcion(t *testing.T) {
 	userId := 1
 	courseId := 2
 
-	inscripcion := model.Inscripciones{Id_Usuario: userId, ID_Curso: courseId}
+	inscripcion := model.Inscripciones{ID_Usuario: userId, ID_Curso: courseId}
 
 	err := inscripciones.CrearInscripcion(inscripcion)
 

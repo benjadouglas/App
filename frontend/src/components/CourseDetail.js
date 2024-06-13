@@ -1,24 +1,27 @@
 // src/components/CourseDetail.js
-import React from 'react';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getCursoById } from "../api/Users";
+import { useState } from "react";
 
-const CourseDetail = ({ course, onEnroll }) => {
-  if (!course) {
-    return <div>Course not found</div>;
-  }
+const CourseDetail = () => {
+  const { id } = useParams();
+  const [course, setCourse] = useState({});
 
-  const { title, description, instructor, duration, requirements, material } = course;
+  useEffect(() => {
+    const getCurso = async () => {
+      const result = await getCursoById(id);
+      setCourse(result);
+    };
+    getCurso();
+  }, [id]);
 
   return (
     <div className="course-detail">
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <div className="course-info">
-        <p><b>Instructor:</b> {instructor}</p>
-        <p><b>Duration:</b> {duration}</p>
-        <p><b>Requirements:</b> {requirements}</p>
-        <p><b>Material:</b> {material}</p>
-      </div>
-      <button onClick={() => onEnroll(course.id)}>Enroll</button>
+      <h2>{course.nombre_curso}</h2>
+      <p>{course.descripcion}</p>
+      <div className="course-info"></div>
+      {/* <button onClick={() => onEnroll(course.id)}>Enroll</button> */}
     </div>
   );
 };

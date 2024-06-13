@@ -86,15 +86,28 @@ export const getAllCursos = async () => {
   }
 };
 
+export const getCursoById = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:8080/cursos/${id}`, {
+      method: "GET",
+      mode: "cors",
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const createCurso = async (nombre, descripcion, precio) => {
   try {
     fetch("http://localhost:8080/cursos/create", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({
+        precio: parseInt(precio),
         nombre_curso: nombre,
         descripcion: descripcion,
-        precio: precio,
         fecha_inicio: new Date(),
         fecha_fin: new Date(),
       }),
@@ -103,3 +116,5 @@ export const createCurso = async (nombre, descripcion, precio) => {
     console.error(err);
   }
 };
+
+export const enrollCourse = async (id) => {};
