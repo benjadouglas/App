@@ -1,3 +1,16 @@
+export const getAllCursos = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/cursos", {
+      method: "GET",
+      mode: "cors",
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const handleLogin = async (Username, Password) => {
   try {
     const response = await fetch("http://localhost:8080/users/login", {

@@ -1,17 +1,38 @@
-
-import React from 'react';
-import Home from '../components/Home';
-import useCourses from '../hooks/useCourses';
+import React, { useEffect, useState } from "react";
+import { getAllCursos } from "../api/Users";
+import Home from "../components/Home";
+import useCourses from "../hooks/useCourses";
 
 const HomePage = () => {
-  const { courses, loading, error } = useCourses(); // Obtener todos los cursos
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const data = await getAllCursos();
+        setCourses(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    console.log(courses);
+  }, [courses]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <p>Error: {error.message}</p>;
   }
 
   return (
