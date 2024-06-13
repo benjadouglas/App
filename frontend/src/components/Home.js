@@ -17,14 +17,16 @@ const Home = ({ courses }) => {
 
   return (
     <div>
-      <h2>All Courses</h2>
+      <h1>Welcome to the Course Management System</h1>
+      <SearchBar onSearch={setSearchTerm} />
+      <h2>Search Results</h2>
       <div className="course-grid">
-        {courses.length ? (
-          courses.map((course) => (
+        {filteredCourses.length ? (
+          filteredCourses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))
         ) : (
-          <p>No courses available</p>
+          <p>No courses found</p>
         )}
       </div>
     </div>
@@ -32,16 +34,3 @@ const Home = ({ courses }) => {
 };
 
 export default Home;
-
-//   <h1>Welcome to the Course Management System</h1>
-//   <SearchBar onSearch={setSearchTerm} />
-//   <h2>Search Results</h2>
-//   <div className="course-grid">
-//     {filteredCourses.length ? (
-//       filteredCourses.map((course) => (
-//         <CourseCard key={course.id} course={course} />
-//       ))
-//     ) : (
-//       <p>No courses found</p>
-//     )}
-//   </div>

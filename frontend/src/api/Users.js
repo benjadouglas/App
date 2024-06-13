@@ -1,16 +1,3 @@
-export const getAllCursos = async () => {
-  try {
-    const response = await fetch("http://localhost:8080/cursos", {
-      method: "GET",
-      mode: "cors",
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const handleLogin = async (Username, Password) => {
   try {
     const response = await fetch("http://localhost:8080/users/login", {
@@ -33,29 +20,6 @@ export const handleLogin = async (Username, Password) => {
     throw error;
   }
 };
-
-// export const handleSignUp = async (Username, Mail, Password) => {
-//   try {
-//     const response = await fetch("http://localhost:8080/users/signup", {
-//       mode: "no-cors",
-//       method: "POST",
-//       header: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         Mail: `${Mail}`,
-//         Username: `${Username}`,
-//         Password: `${Password}`,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .catch((error) => console.log(error));
-//     return response;
-//   } catch (error) {
-//     console.error("Error:", error);
-//     throw error;
-//   }
-// };
 
 export const handleSignUp = async (username, email, password) => {
   // Aquí puedes implementar la lógica para registrar al usuario en tu API
@@ -84,11 +48,9 @@ export const validateUser = async () => {
     const response = await fetch("http://localhost:8080/users/validate", {
       method: "GET",
       credentials: "include",
-    })
-      .then((response) => response.json())
-      .catch((err) => console.log(err));
-    console.log(response);
-    if (!response.ok) {
+    });
+    const data = await response.json();
+    if (data.message !== "Logged in succesfully") {
       return false;
     }
     return true;
@@ -100,19 +62,26 @@ export const validateUser = async () => {
 export const getCursos = async () => {
   try {
     const response = await fetch("http://localhost:8080/cursos/user", {
-      mode: "no-cors",
-      method: "POST",
+      mode: "cors",
+      method: "GET",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      // .then((data) => console.log(data))
-      .catch((error) => console.log(error));
-    return response;
+    });
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error:", error);
-    throw error;
+  }
+};
+
+export const getAllCursos = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/cursos", {
+      method: "GET",
+      mode: "cors",
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 };

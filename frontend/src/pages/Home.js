@@ -23,9 +23,7 @@ const HomePage = () => {
     fetchCourses();
   }, []);
 
-  useEffect(() => {
-    console.log(courses);
-  }, [courses]);
+  useEffect(() => {}, [courses]);
 
   if (loading) {
     return <p>Loading...</p>;

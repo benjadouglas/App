@@ -5,6 +5,7 @@ import (
 	inscripcionesClient "backend/clients/inscripciones"
 	"backend/model"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -41,6 +42,14 @@ func GetCursosInscriptos(c *gin.Context) {
 
 func GetCursos(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, cursos.GetAllCursos())
+}
+
+func GetCursoById(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{})
+	}
+	c.IndentedJSON(http.StatusOK, cursos.GetCursoById(id))
 }
 
 func CreateCurso(c *gin.Context) {

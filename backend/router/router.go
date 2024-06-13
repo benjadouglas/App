@@ -12,7 +12,8 @@ func MapUrls(engine *gin.Engine) {
 
 	engine.POST("/users/login", users.SignIn)
 	engine.POST("/users/signup", users.SignUp)
-	engine.POST("/cursos/create", cursos.CreateCurso)
+	engine.POST("/cursos/", cursos.CreateCurso)
+	engine.GET("/cursos/:id", cursos.GetCursoById)
 	engine.GET("/cursos/user", middleware.RequireAuth, cursos.GetCursosInscriptos)
 	engine.GET("/cursos", cursos.GetCursos)
 	engine.GET("/users/validate", middleware.RequireAuth, users.Validate)

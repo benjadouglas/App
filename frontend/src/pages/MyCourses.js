@@ -1,29 +1,44 @@
-// src/pages/MyCoursesPage.js
-import React from 'react';
-import CourseCard from '../components/CourseCard';
-import useCourses from '../hooks/useCourses';
-import useUser from '../hooks/useUser';
+import { useEffect, useState } from "react";
+import React from "react";
+import CourseCard from "../components/CourseCard";
+import { getCursos } from "../api/Users";
 
 const MyCourses = () => {
-  const { courses, loading, error } = useCourses();
-  const { user } = useUser();
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const data = await getCursos();
+        setCourses(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {}, [courses]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <p>Error: {error.message}</p>;
   }
-
-  const enrolledCourses = courses.filter(course => user.enrolledCourses.includes(course.id));
 
   return (
     <div>
       <h2>Mis Cursos</h2>
       <div className="course-list">
-        {enrolledCourses.length ? (
-          enrolledCourses.map(course => (
+        {courses.length ? (
+          courses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))
         ) : (

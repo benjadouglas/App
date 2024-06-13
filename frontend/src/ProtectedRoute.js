@@ -4,17 +4,27 @@ import { Navigate } from "react-router-dom";
 import { validateUser } from "./api/Users";
 
 const ProtectedRoute = ({ children }) => {
-  // const [name, setName] = useState("");
-  // const { user } = useAuth();
-  // if (!user) {
-  //   return <Navigate to="/loginu" />;
-  // }
-  const { ok } = validateUser();
-  if (ok === false) {
-    return <Navigate to="/loginu" />;
-  } else if (ok === true) {
-    return children;
+  const [isValid, setIsValid] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const result = await validateUser();
+      setIsValid(result);
+      setLoading(false);
+    };
+    checkUser();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
   }
+
+  if (isValid === false) {
+    return <Navigate to="/loginu" />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;
