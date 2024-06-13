@@ -2,6 +2,7 @@ package middleware
 
 import (
 	userClient "backend/clients/users"
+	"backend/model"
 	"fmt"
 	"log"
 	"net/http"
@@ -41,4 +42,25 @@ func RequireAuth(c *gin.Context) {
 	} else {
 		c.IndentedJSON(http.StatusBadRequest, http.StatusBadRequest)
 	}
+}
+
+func IsAdmin(c *gin.Context) {
+	somuser, exists := c.Get("user")
+	if exists == false {
+		c.IndentedJSON(http.StatusUnauthorized, gin.H{
+			"message": "Not authorized",
+		})
+	}
+	user, ok := somuser.(model.Usuario)
+	if ok == false {
+		c.IndentedJSON(http.StatusUnauthorized, gin.H{
+			"message": "Not authorized",
+		})
+	}
+	if user.Is_Admin == false {
+		c.IndentedJSON(http.StatusUnauthorized, gin.H{
+			"message": "Not authorized",
+		})
+	}
+
 }
