@@ -61,7 +61,7 @@ const LoginUsername = () => {
           Login
         </button>
       </form>
-      {loginMessage && <p>{loginMessage}</p>} {/* Mostrar mensaje de login */}
+      {loginMessage && <p>{loginMessage}</p>}
     </div>
   );
 };

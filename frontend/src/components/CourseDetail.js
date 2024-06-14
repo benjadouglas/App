@@ -19,13 +19,16 @@ const CourseDetail = () => {
 
   const handleInscripcion = async () => {
     try {
-      const response = await inscribirCurso(course.id);
-      setMessage(response.message);
+      const response = await inscribirCurso(id);
+      if (response !== "success") {
+        setMessage("Error al inscribirte al curso");
+      }
+      setMessage("Te has inscrito exitosamente al curso");
     } catch (error) {
       setMessage("Error inscribiendo al curso.");
     }
   };
-  console.log(id);
+  console.log(course);
 
   const handleDelete = () => {
     deleteCursoById(id);
@@ -38,6 +41,10 @@ const CourseDetail = () => {
         <p>{course.descripcion}</p>
         <br />
         <p>Costo: {course.precio}</p>
+        <div>
+          <p>Fecha de inicio: {course.fecha_inicio}</p>
+          <p>Fecha de fin: {course.fecha_fin}</p>
+        </div>
         <div>
           <button onClick={handleInscripcion}>Inscribirse</button>
           <button onClick={handleDelete} className="delete-button">

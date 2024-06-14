@@ -104,5 +104,7 @@ func InscribirCurso(c *gin.Context) {
 	if response != nil {
 		c.IndentedJSON(http.StatusInternalServerError, gin.H{})
 	}
-	c.IndentedJSON(http.StatusOK, gin.H{})
+	c.IndentedJSON(http.StatusOK, gin.H{
+		"message": "success",
+	})
 }
