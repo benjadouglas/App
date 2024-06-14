@@ -7,8 +7,15 @@ const CreateCourse = () => {
   const [name, setName] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState(0);
+  const navigate = useNavigate(); // Hook para navegación
+  const { user } = useAuth(); // Obtener el estado de autenticación del contexto
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!user) {
+      navigate('/loginu'); // Redirigir a la página de inicio de sesión si no está autenticado
+      return;
+    }
     createCurso(name, descripcion, precio);
   };
 

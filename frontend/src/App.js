@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer';
@@ -21,7 +21,6 @@ const App = () => {
           <main className="content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/create-course" element={<CreateCourse />} />
               <Route path="/loginu" element={<LoginUsername />} />
               <Route path="/signup" element={<SignUp />} />
               <Route
@@ -33,6 +32,14 @@ const App = () => {
                 }
               />
               <Route path="/courses/:id" element={<CourseDetailPage />} />
+              <Route
+                path="/create-course"
+                element={
+                  <ProtectedRoute>
+                    <CreateCourse />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </main>
           <Footer />
