@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { inscribirCurso } from '../api/Courses';
+import  "./CourseDetails.css"; 
 
 const CourseDetails = ({ course }) => {
   const [message, setMessage] = useState('');
@@ -14,12 +15,14 @@ const CourseDetails = ({ course }) => {
   };
 
   return (
-    <div>
-      <h2>{course.title}</h2>
-      <p>{course.description}</p>
-      <button onClick={handleInscripcion}>Inscribirse</button>
-      {message && <p>{message}</p>}
-    </div>
+    <div className="course-details-container">
+      <div className="course-details">
+        <h3>Seguro quieres inscribirte al curso?</h3>
+        <button onClick={handleInscripcion}>Inscribirse</button>
+        {message && <p>{message}</p>}
+      </div>
+    </div>  
+    
   );
 };
 
