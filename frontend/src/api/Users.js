@@ -36,17 +36,16 @@ export const handleLogin = async (Username, Password) => {
     });
 
     if (!response.ok) {
-      throw new Error('Error al iniciar sesión. Verifica tus credenciales.');
+      throw new Error("Error al iniciar sesión. Verifica tus credenciales.");
     }
 
     const data = await response.json();
-    return { status: 'success', data }; // Devuelve un objeto con estado y datos
+    return { status: "success", data }; // Devuelve un objeto con estado y datos
   } catch (error) {
     console.error("Error al iniciar sesión:", error.message);
-    throw new Error('Error al iniciar sesión. Inténtalo de nuevo más tarde.');
+    throw new Error("Error al iniciar sesión. Inténtalo de nuevo más tarde.");
   }
 };
-
 
 export const handleSignUp = async (username, email, password) => {
   // Aquí puedes implementar la lógica para registrar al usuario en tu API
@@ -138,6 +137,18 @@ export const createCurso = async (nombre, descripcion, precio) => {
         fecha_inicio: new Date(),
         fecha_fin: new Date(),
       }),
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteCursoById = async (id) => {
+  try {
+    fetch(`http://localhost:8080/cursos/${id}`, {
+      mode: "cors",
+      method: "DELETE",
+      credentials: "include",
     });
   } catch (err) {
     console.error(err);

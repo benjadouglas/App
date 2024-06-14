@@ -1,16 +1,16 @@
 // import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Home from './pages/Home';
-import MyCourses from './pages/MyCourses';
-import CourseDetailPage from './pages/CourseDetailPage';
-import LoginUsername from './components/LoginUsername';
-import SignUp from './components/SignUp';
-import { AuthProvider } from './context/AuthContext';
-import ProtectedRoute from './ProtectedRoute';
-import CreateCourse from './components/CreateCourse';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import MyCourses from "./pages/MyCourses";
+import LoginUsername from "./components/LoginUsername";
+import SignUp from "./components/SignUp";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./ProtectedRoute";
+import CreateCourse from "./components/CreateCourse";
+import CourseDetail from "./components/CourseDetail";
 
 const App = () => {
   return (
@@ -31,7 +31,7 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/courses/:id" element={<CourseDetailPage />} />
+              <Route path="/courses/:id" element={<CourseDetail />} />
               <Route
                 path="/create-course"
                 element={

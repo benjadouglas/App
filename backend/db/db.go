@@ -19,7 +19,7 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "bd-arqui"
+	DBName := "db-arqui"
 	DBUser := passw.Get("User")
 	DBPass := passw.Get("Password")
 	DBHost := "127.0.0.1"

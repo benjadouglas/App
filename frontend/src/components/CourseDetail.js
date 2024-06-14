@@ -1,29 +1,53 @@
-import React, { useState } from 'react';
-import { inscribirCurso } from '../api/Courses';
-import  "./CourseDetails.css"; 
+import React, { useEffect, useState } from "react";
+import { inscribirCurso } from "../api/Courses";
+import "./CourseDetails.css";
+import { deleteCursoById, getCursoById } from "../api/Users";
+import { useParams } from "react-router-dom";
 
-const CourseDetails = ({ course }) => {
-  const [message, setMessage] = useState('');
+const CourseDetail = () => {
+  const { id } = useParams();
+  const [course, setCourse] = useState({});
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const getCurso = async () => {
+      const result = await getCursoById(id);
+      setCourse(result);
+    };
+    getCurso();
+  }, [id]);
 
   const handleInscripcion = async () => {
     try {
       const response = await inscribirCurso(course.id);
       setMessage(response.message);
     } catch (error) {
-      setMessage('Error inscribiendo al curso.');
+      setMessage("Error inscribiendo al curso.");
     }
+  };
+  console.log(id);
+
+  const handleDelete = () => {
+    deleteCursoById(id);
   };
 
   return (
     <div className="course-details-container">
       <div className="course-details">
-        <h3>Seguro quieres inscribirte al curso?</h3>
-        <button onClick={handleInscripcion}>Inscribirse</button>
+        <h2>{course.nombre_curso}</h2>
+        <p>{course.descripcion}</p>
+        <br />
+        <p>Costo: {course.precio}</p>
+        <div>
+          <button onClick={handleInscripcion}>Inscribirse</button>
+          <button onClick={handleDelete} className="delete-button">
+            Eliminar
+          </button>
+        </div>
         {message && <p>{message}</p>}
       </div>
-    </div>  
-    
+    </div>
   );
 };
 
-export default CourseDetails;
+export default CourseDetail;
