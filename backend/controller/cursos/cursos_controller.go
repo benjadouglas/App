@@ -44,12 +44,25 @@ func GetCursos(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, cursos.GetAllCursos())
 }
 
+//	func GetCursoById(c *gin.Context) {
+//		id, err := strconv.Atoi(c.Param("id"))
+//		if err != nil {
+//			c.IndentedJSON(http.StatusBadRequest, gin.H{})
+//		}
+//		c.IndentedJSON(http.StatusOK, cursos.GetCursoById(id))
+//	}
 func GetCursoById(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{})
+		return
 	}
-	c.IndentedJSON(http.StatusOK, cursos.GetCursoById(id))
+	curso := cursos.GetCursoById(id)
+	if curso.ID_Curso == 0 {
+		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Curso no encontrado"})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, curso)
 }
 
 func CreateCurso(c *gin.Context) {

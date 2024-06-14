@@ -1,29 +1,26 @@
-// src/components/CourseDetail.js
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getCursoById } from "../api/Users";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { inscribirCurso } from '../api/Courses';
 
-const CourseDetail = () => {
-  const { id } = useParams();
-  const [course, setCourse] = useState({});
+const CourseDetails = ({ course }) => {
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    const getCurso = async () => {
-      const result = await getCursoById(id);
-      setCourse(result);
-    };
-    getCurso();
-  }, [id]);
+  const handleInscripcion = async () => {
+    try {
+      const response = await inscribirCurso(course.id);
+      setMessage(response.message);
+    } catch (error) {
+      setMessage('Error inscribiendo al curso.');
+    }
+  };
 
   return (
-    <div className="course-detail">
-      <h2>{course.nombre_curso}</h2>
-      <p>{course.descripcion}</p>
-      <div className="course-info"></div>
-      {/* <button onClick={() => onEnroll(course.id)}>Enroll</button> */}
+    <div>
+      <h2>{course.title}</h2>
+      <p>{course.description}</p>
+      <button onClick={handleInscripcion}>Inscribirse</button>
+      {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default CourseDetail;
+export default CourseDetails;
