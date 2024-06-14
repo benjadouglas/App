@@ -7,21 +7,27 @@ const Home = ({ courses }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredCourses = courses.filter((course) => {
-    if (!searchTerm) return true;
+    const title = course.nombre_curso ? course.nombre_curso.toLowerCase() : "";
+    const description = course.descripcion ? course.descripcion.toLowerCase() : "";
     const searchText = searchTerm.toLowerCase();
+
     return (
-      course.title.toLowerCase().includes(searchText) ||
-      course.description.toLowerCase().includes(searchText)
+      title.includes(searchText) ||
+      description.includes(searchText)
     );
   });
+
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+  };
 
   return (
     <div>
       <h1>Welcome to the Course Management System</h1>
-      <SearchBar onSearch={setSearchTerm} />
+      <SearchBar onSearch={handleSearch} />
       <h2>Search Results</h2>
       <div className="course-grid">
-        {filteredCourses.length ? (
+        {filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))
