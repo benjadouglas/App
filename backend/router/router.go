@@ -9,7 +9,6 @@ import (
 )
 
 func MapUrls(engine *gin.Engine) {
-
 	engine.POST("/users/login", users.SignIn)
 	engine.POST("/users/signup", users.SignUp)
 	engine.POST("/cursos/create", middleware.RequireAuth, middleware.IsAdmin, cursos.CreateCurso)
@@ -22,7 +21,3 @@ func MapUrls(engine *gin.Engine) {
 	engine.GET("/users/validate", middleware.RequireAuth, users.Validate)
 	engine.DELETE("/cursos/:id", cursos.DeleteCurso)
 }
-
-// /cursos/create ; fecha tiene que enviarse en un string en este formato:
-// 0001-01-01T00:00:00Z
-// año-mes-diaThoraZ

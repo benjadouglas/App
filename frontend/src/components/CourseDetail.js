@@ -28,7 +28,6 @@ const CourseDetail = () => {
       setMessage("Error inscribiendo al curso.");
     }
   };
-  console.log(course);
 
   const handleDelete = () => {
     deleteCursoById(id);
