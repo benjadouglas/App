@@ -4,10 +4,22 @@ import { handleLogin } from "../api/Users";
 const LoginUsername = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginMessage, setLoginMessage] = useState(""); // Estado para el mensaje de login
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleLogin(username, password);
+    try {
+      const response = await handleLogin(username, password);
+      if (response.status === "success") {
+        setLoginMessage("Inicio de sesión exitoso."); // Mensaje de éxito
+        // Aquí podrías redirigir al usuario a otra página si el inicio de sesión fue exitoso
+      } else {
+        setLoginMessage(response.message || "Error al iniciar sesión."); // Mensaje de error del servidor
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.message);
+      setLoginMessage("Error al iniciar sesión. Inténtalo de nuevo más tarde."); // Manejo de errores locales
+    }
   };
 
   return (
@@ -49,7 +61,7 @@ const LoginUsername = () => {
           Login
         </button>
       </form>
-      {/* <p>¿No tienes una cuenta? <Link to="/signup">Regístrate</Link></p> */}
+      {loginMessage && <p>{loginMessage}</p>} {/* Mostrar mensaje de login */}
     </div>
   );
 };
