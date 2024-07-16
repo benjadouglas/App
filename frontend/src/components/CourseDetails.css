@@ -1,9 +1,11 @@
 .course-details-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 55vh; /* Altura completa de la ventana */
+    align-items: flex-start; /* Alinear elementos al inicio en lugar del centro */
+    height: 100vh; /* Altura completa de la ventana */
     background-color: #fff; /* Color de fondo para la página */
+    padding: 20px; /* Añadir padding para espaciar los bordes */
+    box-sizing: border-box; /* Incluir padding en el cálculo de ancho y alto */
 }
 
 .course-details {
@@ -13,9 +15,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 16px;
     width: 400px;
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-right: 20px; /* Añadir espacio entre course-details y comments-section */
 }
 
 .course-details:hover {
@@ -62,4 +63,64 @@ button.delete-button:hover {
     margin-top: 10px;
     font-size: 0.9em;
     color: #dc3545; /* Color rojo para mensajes de error */
+}
+
+.comments-section {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 400px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comments-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.comments-section form {
+    width: 100%;
+    margin-bottom: 20px; /* Espacio entre el formulario y la lista de comentarios */
+}
+
+.comments-section textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.comments-section button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comments-section button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.comments-list {
+    width: 100%;
+}
+
+.comments-list p {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
 }

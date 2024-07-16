@@ -5,7 +5,6 @@ import (
 	inscripcionClient "backend/clients/inscripciones"
 	usersClient "backend/clients/users"
 	"backend/model"
-	"backend/passw"
 
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/mysql"
@@ -19,9 +18,9 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "db-arqui"
-	DBUser := passw.Get("User")
-	DBPass := passw.Get("Password")
+	DBName := "bd-arqui"
+	DBUser := "root"
+	DBPass := "Pirata02"
 	DBHost := "127.0.0.1"
 	dsn := DBUser + ":" + DBPass + "@tcp(" + DBHost + ":3306)/" + DBName + "?charset=utf8&parseTime=True"
 

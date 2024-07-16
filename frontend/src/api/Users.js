@@ -1,25 +1,4 @@
-// export const handleLogin = async (Username, Password) => {
-//   try {
-//     const response = await fetch("http://localhost:8080/users/login", {
-//       method: "POST",
-//       credentials: "include",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         username: `${Username}`,
-//         password: `${Password}`,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => console.log(data))
-//       .catch((error) => console.log(error));
-//     return response;
-//   } catch (error) {
-//     console.error("Error:", error);
-//     throw error;
-//   }
-// };
+
 
 export const handleLogin = async (Username, Password) => {
   try {
