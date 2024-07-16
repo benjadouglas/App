@@ -1,5 +1,3 @@
-
-
 export const handleLogin = async (Username, Password) => {
   try {
     const response = await fetch("http://localhost:8080/users/login", {
@@ -59,6 +57,19 @@ export const validateUser = async () => {
       return false;
     }
     return true;
+  } catch (err) {
+    return false;
+  }
+};
+
+export const isadmin = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/users/isadmin", {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await response.json();
+    return data.isadmin;
   } catch (err) {
     return false;
   }

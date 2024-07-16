@@ -18,9 +18,9 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "bd-arqui"
+	DBName := "db-arqui"
 	DBUser := "root"
-	DBPass := "Pirata02"
+	DBPass := "root"
 	DBHost := "127.0.0.1"
 	dsn := DBUser + ":" + DBPass + "@tcp(" + DBHost + ":3306)/" + DBName + "?charset=utf8&parseTime=True"
 

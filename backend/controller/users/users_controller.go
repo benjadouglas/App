@@ -37,3 +37,15 @@ func Validate(c *gin.Context) {
 		"id":      somuser.(model.Usuario).Id_usuario,
 	})
 }
+
+func IsAdimn(c *gin.Context) {
+	somuser, exists := c.Get("user")
+	if exists == false {
+		c.IndentedJSON(http.StatusUnauthorized, gin.H{
+			"message": "Not authorized",
+		})
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{
+		"isadmin": somuser.(model.Usuario).Is_Admin,
+	})
+}

@@ -19,5 +19,6 @@ func MapUrls(engine *gin.Engine) {
 	engine.GET("/cursos/user", middleware.RequireAuth, cursos.GetCursosInscriptos)
 	engine.GET("/cursos", cursos.GetCursos)
 	engine.GET("/users/validate", middleware.RequireAuth, users.Validate)
+	engine.GET("users/isadmin", middleware.RequireAuth, users.IsAdimn)
 	engine.DELETE("/cursos/:id", cursos.DeleteCurso)
 }
