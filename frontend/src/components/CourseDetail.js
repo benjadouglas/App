@@ -3,6 +3,7 @@ import { inscribirCurso } from "../api/Courses";
 import "./CourseDetails.css";
 import { deleteCursoById, getCursoById, isadmin } from "../api/Users";
 import { useParams } from "react-router-dom";
+import { saveToLocalStorage, getFromLocalStorage } from "../utils/LocalStorage"; // Importar funciones de localStorage
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -25,6 +26,12 @@ const CourseDetail = () => {
     //   setIsAdmin(admin);
     // };
     // checkAdmin();
+
+    // Cargar comentarios desde localStorage
+    const savedComments = getFromLocalStorage(`comments_${id}`);
+    if (savedComments) {
+      setComments(savedComments);
+    }
   }, [id]);
 
   const handleInscripcion = async () => {
@@ -47,8 +54,10 @@ const CourseDetail = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (comment.trim()) {
-      setComments([...comments, comment]);
+      const updatedComments = [...comments, comment];
+      setComments(updatedComments);
       setComment("");
+      saveToLocalStorage(`comments_${id}`, updatedComments);
     }
   };
 
@@ -56,29 +65,21 @@ const CourseDetail = () => {
     setSelectedFile(e.target.files[0]);
   };
 
-  const handleFileUpload = async (e) => {
+  const handleFileUpload = (e) => {
     e.preventDefault();
     if (!selectedFile) {
       setMessage("No se ha seleccionado ningún archivo.");
       return;
     }
-    const formData = new FormData();
-    formData.append("file", selectedFile);
 
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        setMessage("Archivo subido exitosamente.");
-      } else {
-        setMessage("Error al subir el archivo.");
-      }
-    } catch (error) {
-      setMessage("Error al subir el archivo.");
-    }
+    // Simulación de subida de archivos: guardamos en localStorage
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const fileContent = fileReader.result;
+      saveToLocalStorage(`file_${id}`, fileContent);
+      setMessage("Archivo subido exitosamente.");
+    };
+    fileReader.readAsDataURL(selectedFile);
   };
 
   return (
@@ -99,7 +100,6 @@ const CourseDetail = () => {
               Eliminar
             </button>
           </div>
-          {message && <p className="message">{message}</p>}
         </div>
         <div className="comments-section">
           <h3>Comentarios</h3>
@@ -128,6 +128,7 @@ const CourseDetail = () => {
           <form onSubmit={handleFileUpload}>
             <input type="file" onChange={handleFileChange} />
             <button type="submit">Subir Archivo</button>
+            {message && <p className="message">{message}</p>}
           </form>
         </div>
       {/* )} */}

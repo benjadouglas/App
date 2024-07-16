@@ -66,10 +66,16 @@ button.delete-button:hover {
     background-color: #c82333;
 }
 
-.course-details p.message {
+.course-details  {
     margin-top: 10px;
-    font-size: 0.9em;
-    color: #dc3545;
+    font-size: 1em;
+    color: #000000;
+}
+
+p.message {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #3b9f39; 
 }
 
 .comments-section form, .upload-section form {
