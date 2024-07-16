@@ -1,40 +1,47 @@
 .course-details-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Alinear elementos al inicio en lugar del centro */
-    height: 100vh; /* Altura completa de la ventana */
-    background-color: #fff; /* Color de fondo para la página */
-    padding: 20px; /* Añadir padding para espaciar los bordes */
-    box-sizing: border-box; /* Incluir padding en el cálculo de ancho y alto */
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.course-details {
+.course-details-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 900px; /* Maximum width for the content area */
+    margin-bottom: 20px;
+}
+
+.course-details, .comments-section {
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 16px;
-    width: 400px;
+    width: 45%; /* Adjusted width to allow side-by-side display */
     transition: transform 0.2s, box-shadow 0.2s;
-    margin-right: 20px; /* Añadir espacio entre course-details y comments-section */
 }
 
-.course-details:hover {
+.course-details:hover, .comments-section:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.course-details h2 {
+.course-details h2, .comments-section h3, .upload-section h3 {
     font-size: 1.5em;
     margin-bottom: 0.5em;
 }
 
-.course-details p {
+.course-details p, .comments-section textarea, .upload-section input[type="file"] {
     font-size: 1em;
     color: #666;
+    width: 100%;
 }
 
-.course-details button {
+.course-details button, .comments-section button[type="submit"], .upload-section button[type="submit"] {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -51,7 +58,7 @@ button.delete-button {
     background-color: #dc3545;
 }
 
-.course-details button:hover {
+.course-details button:hover, .comments-section button[type="submit"]:hover, .upload-section button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
@@ -62,35 +69,15 @@ button.delete-button:hover {
 .course-details p.message {
     margin-top: 10px;
     font-size: 0.9em;
-    color: #dc3545; /* Color rojo para mensajes de error */
+    color: #dc3545;
 }
 
-.comments-section {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    width: 400px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.comments-section form, .upload-section form {
+    width: 90%;
+    margin-bottom: 20px;
 }
 
-.comments-section h3 {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-}
-
-.comments-section form {
-    width: 100%;
-    margin-bottom: 20px; /* Espacio entre el formulario y la lista de comentarios */
-}
-
-.comments-section textarea {
-    width: 100%;
-    height: 100px;
+.comments-section textarea, .upload-section input[type="file"] {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #e0e0e0;
@@ -98,23 +85,8 @@ button.delete-button:hover {
     font-size: 1em;
 }
 
-.comments-section button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.comments-section button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
 .comments-list {
-    width: 100%;
+    width: 90%;
 }
 
 .comments-list p {
@@ -123,4 +95,20 @@ button.delete-button:hover {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.upload-section {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 60%;
+    max-width: 900px; /* Maximum width for the upload section */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.upload-section:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
