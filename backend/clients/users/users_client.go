@@ -54,7 +54,7 @@ func CreateUser(data usersDomain.SignUpRequest) int {
 	}
 	result := Db.Create(&userM)
 	if result.Error != nil {
-		return 404
+		return 400
 	}
 	return 200
 }

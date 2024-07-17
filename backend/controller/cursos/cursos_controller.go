@@ -51,6 +51,7 @@ func GetCursos(c *gin.Context) {
 //		}
 //		c.IndentedJSON(http.StatusOK, cursos.GetCursoById(id))
 //	}
+
 func GetCursoById(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

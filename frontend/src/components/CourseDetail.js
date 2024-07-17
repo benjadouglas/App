@@ -5,6 +5,8 @@ import { deleteCursoById, getCursoById, isadmin } from "../api/Users";
 import { useParams } from "react-router-dom";
 import { saveToLocalStorage, getFromLocalStorage } from "../utils/LocalStorage"; // Importar funciones de localStorage
 
+const IsAdmin = await isadmin();
+
 const CourseDetail = () => {
   const { id } = useParams();
   const [course, setCourse] = useState({});
@@ -82,47 +84,45 @@ const CourseDetail = () => {
     fileReader.readAsDataURL(selectedFile);
   };
 
-  return (
-    <div className="course-details-container">
-      <div className="course-details-content">
-        <div className="course-details">
-          <h2>{course.nombre_curso}</h2>
-          <p>{course.descripcion}</p>
-          <br />
-          <p>Costo: {course.precio}</p>
-          <div>
-            <p>Fecha de inicio: {course.fecha_inicio}</p>
-            <p>Fecha de fin: {course.fecha_fin}</p>
+  if (IsAdmin) {
+    return (
+      <div className="course-details-container">
+        <div className="course-details-content">
+          <div className="course-details">
+            <h2>{course.nombre_curso}</h2>
+            <p>{course.descripcion}</p>
+            <br />
+            <p>Costo: {course.precio}</p>
+            <div>
+              <p>Fecha de inicio: {course.fecha_inicio}</p>
+              <p>Fecha de fin: {course.fecha_fin}</p>
+            </div>
+            <div>
+              <button onClick={handleInscripcion}>Inscribirse</button>
+              <button onClick={handleDelete} className="delete-button">
+                Eliminar
+              </button>
+            </div>
           </div>
-          <div>
-            <button onClick={handleInscripcion}>Inscribirse</button>
-            <button onClick={handleDelete} className="delete-button">
-              Eliminar
-            </button>
+          <div className="comments-section">
+            <h3>Comentarios</h3>
+            <form onSubmit={handleCommentSubmit}>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Escribe tu comentario"
+              />
+              <button type="submit">Agregar Comentario</button>
+            </form>
+            <div className="comments-list">
+              {comments.length > 0 ? (
+                comments.map((comment, index) => <p key={index}>{comment}</p>)
+              ) : (
+                <p>No hay comentarios aún.</p>
+              )}
+            </div>
           </div>
         </div>
-        <div className="comments-section">
-          <h3>Comentarios</h3>
-          <form onSubmit={handleCommentSubmit}>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              placeholder="Escribe tu comentario"
-            />
-            <button type="submit">Agregar Comentario</button>
-          </form>
-          <div className="comments-list">
-            {comments.length > 0 ? (
-              comments.map((comment, index) => (
-                <p key={index}>{comment}</p>
-              ))
-            ) : (
-              <p>No hay comentarios aún.</p>
-            )}
-          </div>
-        </div>
-      </div>
-      {/* {isAdmin && ( */}
         <div className="upload-section">
           <h3>Subir Archivos</h3>
           <form onSubmit={handleFileUpload}>
@@ -131,9 +131,50 @@ const CourseDetail = () => {
             {message && <p className="message">{message}</p>}
           </form>
         </div>
-      {/* )} */}
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return (
+      <div className="course-details-container">
+        <div className="course-details-content">
+          <div className="course-details">
+            <h2>{course.nombre_curso}</h2>
+            <p>{course.descripcion}</p>
+            <br />
+            <p>Costo: {course.precio}</p>
+            <div>
+              <p>Fecha de inicio: {course.fecha_inicio}</p>
+              <p>Fecha de fin: {course.fecha_fin}</p>
+            </div>
+            <div>
+              <button onClick={handleInscripcion}>Inscribirse</button>
+              <button onClick={handleDelete} className="delete-button">
+                Eliminar
+              </button>
+            </div>
+          </div>
+          <div className="comments-section">
+            <h3>Comentarios</h3>
+            <form onSubmit={handleCommentSubmit}>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Escribe tu comentario"
+              />
+              <button type="submit">Agregar Comentario</button>
+            </form>
+            <div className="comments-list">
+              {comments.length > 0 ? (
+                comments.map((comment, index) => <p key={index}>{comment}</p>)
+              ) : (
+                <p>No hay comentarios aún.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default CourseDetail;
