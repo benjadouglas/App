@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import { isadmin } from "../api/Users";
 
-console.log(await isadmin());
 const IsAdmin = await isadmin();
 const Header = () => {
   if (IsAdmin) {

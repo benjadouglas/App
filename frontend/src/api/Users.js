@@ -135,13 +135,48 @@ export const createCurso = async (nombre, descripcion, precio) => {
 
 export const deleteCursoById = async (id) => {
   try {
-    fetch(`http://localhost:8080/cursos/${id}`, {
+    const response = fetch(`http://localhost:8080/cursos/${id}`, {
       mode: "cors",
       method: "DELETE",
       credentials: "include",
     });
+    const data = await response.json();
+    return data;
   } catch (err) {
-    console.error(err);
+    return err;
+  }
+};
+
+export const createComment = async (cursoId, comment) => {
+  try {
+    const response = fetch(`http://localhost:8080/cursos/comentarios`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        Id_curso: parseInt(cursoId),
+        Comentario: comment,
+      }),
+    });
+    const data = await response.json();
+    return data.body;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getComments = async (id) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/cursos/comentarios/${id}`,
+      {
+        method: "GET",
+        credentials: "include",
+      },
+    );
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return err;
   }
 };
 

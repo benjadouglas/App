@@ -16,7 +16,7 @@ func MapUrls(engine *gin.Engine) {
 	// Pasarle en le body del json el id del curso (ID_Curso), Poner el nombre de la variable en el json
 	// como esta en el parentesis
 	engine.POST("/cursos/inscribir", middleware.RequireAuth, cursos.InscribirCurso)
-	engine.GET("/cursos/comentarios", comentarios.GetCursosComment)
+	engine.GET("/cursos/comentarios/:id", comentarios.GetCursosComment)
 	engine.POST("/cursos/comentarios", middleware.RequireAuth, comentarios.CreateComment)
 	engine.GET("/cursos/:id", cursos.GetCursoById)
 	engine.GET("/cursos/user", middleware.RequireAuth, cursos.GetCursosInscriptos)

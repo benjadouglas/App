@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { inscribirCurso } from "../api/Courses";
 import "./CourseDetails.css";
-import { deleteCursoById, getCursoById, isadmin } from "../api/Users";
+import {
+  deleteCursoById,
+  getCursoById,
+  isadmin,
+  createComment,
+  getComments,
+} from "../api/Users";
 import { useParams } from "react-router-dom";
 import { saveToLocalStorage, getFromLocalStorage } from "../utils/LocalStorage"; // Importar funciones de localStorage
 
 const IsAdmin = await isadmin();
+console.log(IsAdmin);
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -23,17 +30,13 @@ const CourseDetail = () => {
     };
     getCurso();
 
-    // const checkAdmin = async () => {
-    //   const admin = await isadmin();
-    //   setIsAdmin(admin);
-    // };
-    // checkAdmin();
-
-    // Cargar comentarios desde localStorage
-    const savedComments = getFromLocalStorage(`comments_${id}`);
-    if (savedComments) {
-      setComments(savedComments);
-    }
+    const GetComments = async () => {
+      const savedComments = await getComments(id);
+      if (savedComments) {
+        setComments(savedComments);
+      }
+    };
+    GetComments();
   }, [id]);
 
   const handleInscripcion = async () => {
@@ -56,10 +59,8 @@ const CourseDetail = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (comment.trim()) {
-      const updatedComments = [...comments, comment];
-      setComments(updatedComments);
-      setComment("");
-      saveToLocalStorage(`comments_${id}`, updatedComments);
+      console.log("Comentario:", comment);
+      createComment(id, comment);
     }
   };
 
@@ -116,7 +117,9 @@ const CourseDetail = () => {
             </form>
             <div className="comments-list">
               {comments.length > 0 ? (
-                comments.map((comment, index) => <p key={index}>{comment}</p>)
+                comments.map((comment) => (
+                  <p key={comment.Id_comentario}>{comment.Comentario}</p>
+                ))
               ) : (
                 <p>No hay comentarios aún.</p>
               )}
@@ -155,17 +158,19 @@ const CourseDetail = () => {
           </div>
           <div className="comments-section">
             <h3>Comentarios</h3>
-            <form onSubmit={handleCommentSubmit}>
+            {/* <form onSubmit={handleCommentSubmit}>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Escribe tu comentario"
               />
               <button type="submit">Agregar Comentario</button>
-            </form>
+            </form> */}
             <div className="comments-list">
               {comments.length > 0 ? (
-                comments.map((comment, index) => <p key={index}>{comment}</p>)
+                comments.map((comment) => (
+                  <p key={comment.Id_comentario}>{comment.Comentario}</p> // Access the Comentario property
+                ))
               ) : (
                 <p>No hay comentarios aún.</p>
               )}

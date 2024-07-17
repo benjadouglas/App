@@ -15,9 +15,8 @@ import (
 func RequireAuth(c *gin.Context) {
 	tokenString, err := c.Cookie("Authorization")
 	if err != nil {
-		c.AbortWithStatus(http.StatusUnauthorized)
+		c.IndentedJSON(http.StatusBadRequest, http.StatusBadRequest)
 	}
-
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
@@ -26,16 +25,16 @@ func RequireAuth(c *gin.Context) {
 	})
 	if err != nil {
 		log.Println(err)
-		c.AbortWithStatus(http.StatusUnauthorized)
+		c.IndentedJSON(http.StatusBadRequest, http.StatusBadRequest)
 	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		if float64(time.Now().Unix()) > claims["exp"].(float64) {
-			c.AbortWithStatus(http.StatusUnauthorized)
+			c.IndentedJSON(http.StatusBadRequest, http.StatusBadRequest)
 		}
 		user := userClient.GetUserById(int(claims["sub"].(float64)))
 		if user.Id_usuario == 0 {
-			c.AbortWithStatus(http.StatusUnauthorized)
+			c.IndentedJSON(http.StatusBadRequest, http.StatusBadRequest)
 		}
 		c.Set("user", user)
 		c.Next()
